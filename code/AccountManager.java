@@ -1,77 +1,34 @@
-import java.io.IOException;
-import java.io.PrintWriter;
+import javax.swing.event.MenuListener;
 import java.util.Scanner;
 
-
 public class AccountManager {
+
     static Account myAcc = new Account();
-    static Account.Check_Save_Account mySavings = Account.Check_Save_Account.AccountContainer;
-    public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        String username = new String("");
-        String password = new String("");
-        System.out.println("Enter Username");
-        username = scan.nextLine();
-        System.out.println("Enter Password");
-        password = scan.nextLine();
+    static Account.Check_Save_Account mySavings = Account.Check_Save_Account.Savings;
+    static Account.Check_Save_Account myChecking = Account.Check_Save_Account.Checkings;
+    static void Registration(String usern, String pass, int flag){
+        if(flag == 1)
+            myAcc.Login(usern, pass);
+        if(flag == 2)
+            myAcc.RegisterAccount(usern, pass);
+    }
 
+    //Flag 0 marks account creation
+    //Flag 1 marks existing account
+    static void AccountLogic(Account.Check_Save_Account check,double amount, int accType, int actionFlag){
 
-        //Account.Check_Save_Account myChecking = Account.Check_Save_Account.AccountContainer;
-        myAcc.SetUserName(username);
-        myAcc.SetPassword(password);
-        myAcc.CreateAccount(mySavings, 500, 0);
-        //myAcc.CreateAccount(myChecking, 250, 1);
-        //System.out.println("Checking Balance: "+ myChecking.amount);
-
-
-        boolean loop = true;
-        while(loop) {
-            System.out.println("\n\nMyBank");
-            System.out.println("\nMENU");
-            System.out.println("1: Make a Deposit");
-            System.out.println("2: Make a Withdrawl");
-            System.out.println("3: Check Balance");
-            System.out.println("4: EXIT");
-            int choice = 0;
-            choice = scan.nextInt();
-            switch (choice) {
-                case 1:
-                    Menu1();
-                    break;
-                case 2:
-                    Menu2();
-                    break;
-                case 3:
-                    Menu3();
-                    break;
-                case 4:
-                    Menu4();
-                    loop = false;
-                    break;
-                default:
-                    break;
-            }
+        if(actionFlag == 0){
+            myAcc.CreateAccount(check, amount, accType);
+        }
+        if(actionFlag == 1){
+            myAcc.AdjustAccount(check, amount, accType);
         }
     }
 
-    public static void Menu1(){
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Enter the Deposit Amount: ");
-        double amount = scan.nextDouble();
+    static void DisplayBalance(){
+        System.out.println("\n\nAccount Balances");
+        System.out.println("Savings:  " + mySavings.amount);
+        System.out.println("Checking: " + myChecking.amount);
+    }
 
-        myAcc.AdjustAccount(mySavings, Math.abs(amount) , 0);
-    }
-    public static void Menu2(){
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Enter the Withdrawl Amount: ");
-        double amount = scan.nextDouble();
-        myAcc.AdjustAccount(mySavings, -Math.abs(amount), 0);
-    }
-    public static void Menu3(){
-        System.out.println("\n\nAccount Balance: "+ mySavings.amount);
-    }
-    public static void Menu4(){
-        System.out.println("Thank you for using MyBank!");
-    }
 }
-

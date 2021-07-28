@@ -1,19 +1,22 @@
 import java.lang.String;
+import java.util.logging.Logger;
 
 public class Account{
 
     private String _Username;
     private String _Password;
+    private int _AccountID;
 
 
     //For this example of a banking app, I will only focus on basic Checking and Saving accounts
     //I can adjust the structure to allow for other account types in the future
     public enum Check_Save_Account {
-        AccountContainer (000.00);
+        Savings(000.00),
+        Checkings(000.00);
 
-        public double amount = 0;
+        double amount = 0;
 
-        private Check_Save_Account(double amountToAdjust){
+        Check_Save_Account(double amountToAdjust){
             this.amount = amountToAdjust;
         }
     };
@@ -23,24 +26,35 @@ public class Account{
     void Account(){
 
     }
-
-    public void SetUserName(String usern) {
-        //Check for illegal characters or any existing usernames in the database
+    public void RegisterAccount(String usern, String pass) {
+        //Check database for duplicate entries on username
         _Username = usern;
-    }
-    public String GetUserName() {
-        return _Username;
+        //Complexity algorithm for password strength?
+        //Perform basic encryption
+        _Password = pass;
+        //Generate unique Account ID
+
+        //Attempt Login once registration is done
+        Login(usern, pass);
     }
 
-    public void SetPassword(String pass){
-        //Run simple encryption on the password
-        _Password = pass;
+    public boolean Login(String usern, String pass){
+
+        boolean connected = true;
+        //Find if user exists
+        if(connected){
+            //Make connection and grant access
+            return true;
+        }
+        else{
+            //Print out account with username and password does not exist
+            return false;
+        }
     }
 
     //Create a new account with and initial amount
     //the flag specifies if it is a checking or a savings account
-    public void CreateAccount(Check_Save_Account acc, double initAmount,int flag)
-    {
+    public void CreateAccount(Check_Save_Account acc, double initAmount,int flag) {
         int newLen = myAccount.length + 1;
         //Empty Account
         if (newLen == 1) {
