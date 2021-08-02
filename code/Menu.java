@@ -1,29 +1,33 @@
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Menu {
 
+    public static Scanner scanIn = new Scanner(System.in);
     static AccountManager account = new AccountManager();
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
 
+        //FileManager file = new FileManager();
+        //file.TextLoadFile("TestFile.txt");
         account.AccountLogic(account.mySavings, 500, 0, 0);
         account.AccountLogic(account.myChecking, 500, 0, 0);
 
         MenuLogic();
     }
     static void MenuLogic(){
-        Scanner scan = new Scanner(System.in);
+
 
         System.out.println("1:Login\n2:Register with new Account");
-        int choice = scan.nextInt();
+        int choice = scanIn.nextInt();
         String username ;
         String password ;
-        scan.nextLine();
+        scanIn.nextLine();
 
         System.out.println("Enter Username");
-        username = scan.nextLine();
+        username = scanIn.nextLine();
 
         System.out.println("Enter Password");
-        password = scan.nextLine();
+        password = scanIn.nextLine();
 
         account.Registration(username, password, choice);
 
@@ -37,21 +41,21 @@ public class Menu {
             System.out.println("3: Check Balance");
             System.out.println("4: Sign Out");
             amount = 0;
-            choice = scan.nextInt();
+            choice = scanIn.nextInt();
             switch (choice) {
                 case 1:
                     System.out.println("Which Account:  ");
                     System.out.println("1: Savings");
                     System.out.println("2: Checking");
                     System.out.println("3: BACK");
-                    amount = scan.nextDouble();
+                    amount = scanIn.nextDouble();
                     System.out.println("Enter the Deposit Amount: ");
                     if(amount == 1) {
-                        amount = scan.nextDouble();
+                        amount = scanIn.nextDouble();
                         account.AccountLogic(account.mySavings, Math.abs(amount), 0, 1);
                     }
                     if(amount == 2) {
-                        amount = scan.nextDouble();
+                        amount = scanIn.nextDouble();
                         account.AccountLogic(account.myChecking, Math.abs(amount), 1, 1);
                     }
                     else
@@ -63,14 +67,14 @@ public class Menu {
                     System.out.println("1: Savings");
                     System.out.println("2: Checking");
                     System.out.println("3: BACK");
-                    amount = scan.nextDouble();
+                    amount = scanIn.nextDouble();
                     System.out.println("Enter the Withdrawal Amount: ");
                     if(amount == 1) {
-                        amount = scan.nextDouble();
+                        amount = scanIn.nextDouble();
                         account.AccountLogic(account.mySavings, -Math.abs(amount), 0, 1);
                     }
                     if(amount == 2) {
-                        amount = scan.nextDouble();
+                        amount = scanIn.nextDouble();
                         account.AccountLogic(account.myChecking, -Math.abs(amount), 1, 1);
                     }
                     else
@@ -82,7 +86,7 @@ public class Menu {
                     break;
                 case 4:
                     System.out.println("Are you sure you want to sign out?\n1: Yes\n2: No");
-                    amount = scan.nextDouble();
+                    amount = scanIn.nextDouble();
                     if(amount == 1){
                         System.out.println("Thank you for using MyBank!");
                         loop = false;

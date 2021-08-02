@@ -1,6 +1,7 @@
 import java.lang.String;
+import java.util.ArrayList;
 
-@lombok.extern.slf4j.Slf4j
+//@lombok.extern.slf4j.Slf4j
 public class Account{
 
     private String _Username;
@@ -11,16 +12,13 @@ public class Account{
     //For this example of a banking app, I will only focus on basic Checking and Saving accounts
     //I can adjust the structure to allow for other account types in the future
     public enum Check_Save_Account {
-        Savings(000.00),
-        Checkings(000.00);
+        Savings,
+        Checkings;
 
         double amount;
-
-        Check_Save_Account(double amountToAdjust){
-            this.amount = amountToAdjust;
-        }
     }
-    Check_Save_Account[] myAccount = new Check_Save_Account[]{};
+    ArrayList<Check_Save_Account> myAccount = new ArrayList<Check_Save_Account>();
+    //Check_Save_Account[] myAccount = new Check_Save_Account[]{};
     double overdraftLim = 200.00;
 
     void Account(){
@@ -34,10 +32,13 @@ public class Account{
         //Perform basic encryption
         _Password = pass;
         //Generate unique Account ID
+        double seed = Math.random() + 0.1;
+        _AccountID = (int) ((Math.random() + 0.1) * 1000 * seed);
+        //if _AccountId exists somewhere else in the DB, seed it differently
 
         //Attempt Login once registration is done
 
-        log.info("Registration successful for "+_Username);
+        //log.info("Registration successful for "+_Username);
         Login(usern, pass);
     }
 
@@ -47,14 +48,14 @@ public class Account{
         //Find if user exists
         if(connected){
             //Make connection and grant access
-            log.info("Login Successful");
+            //log.info("Login Successful");
             _Username = usern;
             _Password = pass;
             return true;
         }
         else{
             //Print out account with username and password does not exist
-            log.info("Account does not exist");
+            //log.info("Account does not exist");
             return false;
         }
     }
@@ -62,20 +63,8 @@ public class Account{
     //Create a new account with and initial amount
     //the flag specifies if it is a checking or a savings account
     public void CreateAccount(Check_Save_Account acc, double initAmount,int flag) {
-        int newLen = myAccount.length + 1;
         acc.amount = AdjustAccount(acc, initAmount, flag);
-        //Empty Account
-        if (newLen == 1) {
-            myAccount = new Check_Save_Account[newLen];
-            myAccount[0] = acc;
-        }
-        //Non-Empty Account
-        else {
-            Check_Save_Account[] data = myAccount;
-            myAccount = new Check_Save_Account[newLen];
-            System.arraycopy(data, 0, myAccount, 0, myAccount.length - 2);
-            myAccount[newLen - 1] = acc;
-        }
+        myAccount.add(acc);
     }
 
     //Adjust the passed in account based on the passed in amount
@@ -90,7 +79,7 @@ public class Account{
         //Calculate overdraft for checking accounts
         if(adjust < 0)
         {
-            for (int i = 0; i < myAccount.length; i++){
+            for (int i = 0; i < myAccount.size(); i++){
                 //Flag for Savings Account
                 if(flag == 0){
                     //Log error, reject adjustment of negative balance to savings account
