@@ -1,12 +1,9 @@
-import javax.swing.event.MenuListener;
-import java.util.Scanner;
-
 public class AccountManager {
 
-    static Account myAcc = new Account();
-    static Account.Check_Save_Account mySavings = Account.Check_Save_Account.Savings;
-    static Account.Check_Save_Account myChecking = Account.Check_Save_Account.Checkings;
-    static void Registration(String usern, String pass, int flag){
+    Account myAcc = new Account();
+    Account.Check_Save_Account mySavings = Account.Check_Save_Account.Savings;
+    Account.Check_Save_Account myChecking = Account.Check_Save_Account.Checkings;
+    void Registration(String usern, String pass, int flag){
         if(flag == 1)
             myAcc.Login(usern, pass);
         if(flag == 2)
@@ -15,7 +12,7 @@ public class AccountManager {
 
     //Flag 0 marks account creation
     //Flag 1 marks existing account
-    static void AccountLogic(Account.Check_Save_Account check,double amount, int accType, int actionFlag){
+    void AccountLogic(Account.Check_Save_Account check,double amount, int accType, int actionFlag){
 
         if(actionFlag == 0){
             myAcc.CreateAccount(check, amount, accType);
@@ -25,10 +22,9 @@ public class AccountManager {
         }
     }
 
-    static void DisplayBalance(){
+    void DisplayBalance(){
         System.out.println("\n\nAccount Balances");
         System.out.println("Savings:  " + mySavings.amount);
         System.out.println("Checking: " + myChecking.amount);
     }
-
 }
