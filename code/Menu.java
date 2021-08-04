@@ -18,7 +18,6 @@ public class Menu {
         int choice;
         String username ;
         String password ;
-
         System.out.println("Enter Username");
         username = scanIn.nextLine();
 
@@ -53,11 +52,11 @@ public class Menu {
                     System.out.println("Enter the Deposit Amount: ");
                     if(amount == 1) {
                         amount = scanIn.nextDouble();
-                        account.AccountLogic(account.mySavings, Math.abs(amount), 0, 1);
+                        account.AccountLogic(account.mySavings, Math.abs(amount), 1, 1);
                     }
                     if(amount == 2) {
                         amount = scanIn.nextDouble();
-                        account.AccountLogic(account.myChecking, Math.abs(amount), 1, 1);
+                        account.AccountLogic(account.myChecking, Math.abs(amount), 2, 1);
                     }
                     else
                         continue;
@@ -72,11 +71,11 @@ public class Menu {
                     System.out.println("Enter the Withdrawal Amount: ");
                     if(amount == 1) {
                         amount = scanIn.nextDouble();
-                        account.AccountLogic(account.mySavings, -Math.abs(amount), 0, 1);
+                        account.AccountLogic(account.mySavings, -Math.abs(amount), 1, 1);
                     }
                     if(amount == 2) {
                         amount = scanIn.nextDouble();
-                        account.AccountLogic(account.myChecking, -Math.abs(amount), 1, 1);
+                        account.AccountLogic(account.myChecking, -Math.abs(amount), 2, 1);
                     }
                     else
                         continue;

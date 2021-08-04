@@ -16,17 +16,15 @@ public class AccountTest extends TestCase {
 
     @Test
     public void registerAccount() {
-    //Assert.assertEquals();
-
-    }
-
-    @Test
-    public void createAccount() {
-    //Assert.assertEquals();
+        //AccountManager accountManager = new AccountManager();
+        //accountManager.Registration("Jake", "1245", 0);
+        //Assert.assertEquals(accountManager.myAcc._Username, "Jake");
     }
 
     @Test
     public void adjustAccount() {
-    //Assert.assertEquals();
+        //AccountManager accountManager = new AccountManager();
+        //accountManager.AccountLogic(accountManager.myAcc.mySavings, 200, 1, 0);
+        //Assert.assertEquals(accountManager.myAcc.mySavings.amount, 200);
     }
 }
