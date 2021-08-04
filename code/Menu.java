@@ -6,10 +6,10 @@ public class Menu {
     static FileManager file = new FileManager();
     public static Scanner scanIn = new Scanner(System.in);
     static AccountManager account = new AccountManager();
+
     public static void main(String[] args) throws IOException {
         MenuLogic();
     }
-
 
     static void MenuLogic() throws IOException {
 
@@ -102,4 +102,4 @@ public class Menu {
             }
         }
     }
-    }
+}

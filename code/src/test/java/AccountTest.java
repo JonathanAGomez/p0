@@ -1,6 +1,8 @@
 package src.test.java;
+import org.junit.Assert;
 
 import junit.framework.TestCase;
+import org.junit.Before;
 import org.junit.After;
 import org.junit.Test;
 
@@ -14,17 +16,17 @@ public class AccountTest extends TestCase {
 
     @Test
     public void registerAccount() {
-
+    //Assert.assertEquals();
 
     }
 
     @Test
     public void createAccount() {
-
+    //Assert.assertEquals();
     }
 
     @Test
     public void adjustAccount() {
-
+    //Assert.assertEquals();
     }
 }
