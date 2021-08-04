@@ -1,22 +1,27 @@
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
+import java.io.*;
 
 public class Menu {
 
+    static FileManager file = new FileManager();
     public static Scanner scanIn = new Scanner(System.in);
     static AccountManager account = new AccountManager();
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException {
 
-        //FileManager file = new FileManager();
         //file.TextLoadFile("TestFile.txt");
-        account.AccountLogic(account.mySavings, 500, 0, 0);
-        account.AccountLogic(account.myChecking, 500, 0, 0);
+
+        //file.TextLoadFile("E:\\Revature\\Work\\Projects\\p0\\code\\TestFile.txt");
+        //account.AccountLogic(account.mySavings, 500, 0, 0);
+        //account.AccountLogic(account.myChecking, 500, 0, 0);
 
         MenuLogic();
     }
-    static void MenuLogic(){
+    static void MenuLogic() throws IOException {
 
-
+        double amount;
+        boolean loop = true;
         System.out.println("1:Login\n2:Register with new Account");
         int choice = scanIn.nextInt();
         String username ;
@@ -29,10 +34,21 @@ public class Menu {
         System.out.println("Enter Password");
         password = scanIn.nextLine();
 
-        account.Registration(username, password, choice);
+        if(choice == 1){
+            try{
+                //file.TextWriteFile("TestFile.txt");
+                //file.TextLoadFile("TestFile.txt");
+                file.TextLoadFile("LogInfo_User_"+username+".txt");
+            }
+            catch(Exception ex){
+                System.out.println("Username not found");
+                loop = false;
+            }
+        }
 
-        double amount;
-        boolean loop = true;
+        //account.Registration(username, password, choice);
+
+
         while(loop) {
             System.out.println("\nMyBank");
             System.out.println("\nMENU");
@@ -88,6 +104,8 @@ public class Menu {
                     System.out.println("Are you sure you want to sign out?\n1: Yes\n2: No");
                     amount = scanIn.nextDouble();
                     if(amount == 1){
+                        file.TextWriteFile("LogInfo_User_"+username+".txt", 1);
+                        //file.TextWriteFile("TestFile.txt", 0);
                         System.out.println("Thank you for using MyBank!");
                         loop = false;
                     }

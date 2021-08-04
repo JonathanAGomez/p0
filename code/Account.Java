@@ -81,13 +81,13 @@ public class Account{
         {
             for (int i = 0; i < myAccount.size(); i++){
                 //Flag for Savings Account
-                if(flag == 0){
+                if(flag == 1){
                     //Log error, reject adjustment of negative balance to savings account
 
                     return type.amount;
                 }
                 //Flag for Checking Account
-                if(flag == 1){
+                if(flag == 2){
                     if(adjust <= overdraftLim){
                         //Overdraft limit reached. Reject adjustment and output response
 
