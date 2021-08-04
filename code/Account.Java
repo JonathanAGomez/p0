@@ -8,6 +8,10 @@ public class Account{
     private String _Password;
     private int _AccountID;
 
+    public String GetUser(){return _Username;}
+    public String GetPass(){return _Password;}
+    public int GetID(){return _AccountID;}
+
 
     //For this example of a banking app, I will only focus on basic Checking and Saving accounts
     //I can adjust the structure to allow for other account types in the future
@@ -17,7 +21,8 @@ public class Account{
 
         double amount;
     }
-    ArrayList<Check_Save_Account> myAccount = new ArrayList<Check_Save_Account>();
+    public ArrayList<Check_Save_Account> myAccount = new ArrayList<Check_Save_Account>();
+    public int Count(){return myAccount.size();}
     //Check_Save_Account[] myAccount = new Check_Save_Account[]{};
     double overdraftLim = 200.00;
 
